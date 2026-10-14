@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Power Rankings — RPL</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--red:#ff1233;--bg:#0f0f1a;--s1:#151524;--s3:#202035;--tx:#f2f2fa;--tx2:#b4b4d0;--mu2:#5c5c7a;--gr:#18d464;--lose:#f06070;
+--gb:rgba(26,26,44,.58);--gbs:rgba(26,26,44,.4);--gl:rgba(255,255,255,.12);--sh:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.07);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:inherit}
+body{background:radial-gradient(1100px 620px at 12% -8%,rgba(232,0,29,.13),transparent 55%),radial-gradient(900px 560px at 100% 0,rgba(91,156,246,.08),transparent 50%),var(--bg);color:var(--tx);font:14px 'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:900px;margin:0 auto;padding:40px 20px 56px}
+.eyebrow{display:flex;align-items:center;gap:10px;font:700 10px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#ff4d5e;margin-bottom:10px}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--red);border-radius:2px}
+h1{font:clamp(48px,11vw,88px)/.9 'Bebas Neue',sans-serif;letter-spacing:.02em}
+h1 em{font-style:normal;background:linear-gradient(180deg,#ff4d5e 10%,var(--red) 90%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--tx2);font-size:13.5px;line-height:1.7;max-width:480px;margin:14px 0 26px}
+.tabs{display:inline-flex;gap:2px;padding:3px;background:var(--gbs);border:1px solid var(--gl);border-radius:11px;margin-bottom:18px}
+.tabs button{background:none;border:0;color:var(--tx2);font:500 12.5px 'Inter',sans-serif;padding:7px 16px;border-radius:8px;cursor:pointer}
+.tabs button.on{color:#fff;background:rgba(255,255,255,.1);box-shadow:inset 0 -2px 0 var(--red)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:14px}
+.chips button{flex:none;background:var(--gbs);border:1px solid var(--gl);color:var(--tx2);font:500 11px 'JetBrains Mono',monospace;padding:7px 11px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.chips button:hover{color:#fff}
+.chips button.on{background:var(--red);color:#fff;border-color:rgba(255,255,255,.15)}
+.card{background:var(--gb);border:1px solid var(--gl);border-radius:14px;box-shadow:var(--sh);overflow:hidden;position:relative}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(255,18,51,.5),transparent 55%)}
+.head{padding:20px 22px 14px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--gl)}
+.head h2{font:30px 'Bebas Neue',sans-serif;letter-spacing:.04em}
+.date{font:11px 'JetBrains Mono',monospace;color:var(--tx2)}
+.row{display:flex;align-items:center;gap:14px;padding:13px 22px;border-bottom:1px solid rgba(255,255,255,.055);transition:background .2s}
+.row:last-child{border:0}.row:hover{background:rgba(255,255,255,.03)}
+.rk{font:28px 'Bebas Neue',sans-serif;width:34px;color:var(--mu2)}
+.row:first-child .rk{color:var(--red)}
+.code{width:42px;height:42px;border-radius:11px;background:rgba(255,18,51,.09);border:1px solid rgba(255,18,51,.22);display:grid;place-items:center;font:600 11px 'JetBrains Mono',monospace;flex:none}
+.row:first-child .code{background:var(--red);border-color:rgba(255,255,255,.2);box-shadow:0 4px 20px rgba(255,18,51,.45)}
+.code{position:relative}.code img{position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);object-fit:contain}.code span{display:none}.code.nl span{display:block}.row:first-child .code.lg{background:rgba(255,255,255,.1)}
+.nm{flex:1;font:600 15px 'Inter',sans-serif;min-width:0}
+.rec{font:12px 'JetBrains Mono',monospace;color:var(--tx2)}
+.mv{font:600 11px 'JetBrains Mono',monospace;width:54px;text-align:right}
+.up{color:var(--gr)}.dn{color:var(--lose)}.eq{color:var(--mu2)}.nw{color:#5b9cf6}
+.note{padding:12px 22px;font-size:11.5px;color:var(--tx2);border-top:1px solid var(--gl)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.stats .card{padding:18px 22px}
+.stats h3{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#ff4d5e;margin-bottom:12px}
+.st{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.055)}
+.st:last-child{border:0}.st b{font:500 12px 'JetBrains Mono',monospace;color:var(--tx2)}
+@media(max-width:640px){.stats{grid-template-columns:1fr}.row{padding:11px 14px;gap:10px}.rec{display:none}.head{padding:16px 14px 12px}.code{width:38px;height:38px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="wrap">
+<div class="eyebrow">Revolutionary Pro League</div>
+<h1>Power <em>Rankings</em></h1>
+<p class="sub">Every power rankings release from Season 2 to Season 14, with movement tracked release to release.</p>
+<div class="tabs"><button class="on" data-t="teams">Teams</button><button data-t="players">Players</button></div>
+<div class="chips" id="chips"></div>
+<div class="card" id="main"></div>
+<div class="stats" id="stats"></div>
+</div>
+<script>
+const T={HOU:"Houston Rockets",DEN:"Denver Nuggets",NYK:"New York Knicks",BOS:"Boston Celtics",SAS:"San Antonio Spurs",BKN:"Brooklyn Nets",CLE:"Cleveland Cavaliers",GSW:"Golden State Warriors",LAL:"Los Angeles Lakers",OKC:"Oklahoma City Thunder",DAL:"Dallas Mavericks",IND:"Indiana Pacers",PHI:"Philadelphia 76ers",ATL:"Atlanta Hawks",MIN:"Minnesota Timberwolves",CHA:"Charlotte Hornets",UTA:"Utah Jazz",MIA:"Miami Heat",CHI:"Chicago Bulls",MIL:"Milwaukee Bucks",LAC:"Los Angeles Clippers",NOP:"New Orleans Pelicans",POR:"Portland Trail Blazers",WAS:"Washington Wizards",PHX:"Phoenix Suns",TOR:"Toronto Raptors",ORL:"Orlando Magic"};
+const ES={HOU:"hou",DEN:"den",NYK:"ny",BOS:"bos",SAS:"sa",BKN:"bkn",CLE:"cle",GSW:"gs",LAL:"lal",OKC:"okc",DAL:"dal",IND:"ind",PHI:"phi",ATL:"atl",MIN:"min",CHA:"cha",UTA:"utah",MIA:"mia",CHI:"chi",MIL:"mil",LAC:"lac",NOP:"no",POR:"por",WAS:"wsh",PHX:"phx",TOR:"tor",ORL:"orl"};
+const R=(l,d,s,r)=>({l,d,t:s.split(" "),r:r&&r.split(" ")});
+const D=[
+R("S2 Final","9/27/25","CHI GSW UTA BKN LAL LAC DEN MIN TOR BOS"),
+R("S3 Final","10/15/25","CLE DAL TOR BOS GSW HOU OKC CHA DEN LAL"),
+R("S4 Pre","10/20/25","HOU DEN NYK BOS SAS BKN CLE GSW LAL OKC"),
+R("S4 W1","10/23/25","GSW DAL BOS HOU SAS NYK CLE POR IND DEN"),
+R("S4 W3","11/1/25","HOU PHI SAS BOS CLE LAL OKC GSW NYK ATL"),
+R("S4 W4","11/6/25","HOU BOS SAS OKC IND NYK CHA GSW CLE MIN"),
+R("S5 Pre","11/17/25","DEN UTA DAL BKN MIA BOS GSW LAL HOU CHI"),
+R("S5 W2","11/29/25","LAL IND SAS MIL BKN BOS DEN LAC GSW DAL"),
+R("S5 W3","12/6/25","LAL IND SAS BKN MIL BOS LAC GSW NOP NYK"),
+R("S6 W1","12/22/25","MIN BOS LAC DEN LAL CLE DAL OKC BKN IND"),
+R("S7 W3","1/21/26","PHI DAL PHX WAS HOU TOR ORL LAC LAL GSW"),
+R("S8 Final","3/7/26","DEN OKC NYK BOS ATL CHI DAL ORL HOU PHI"),
+R("S9 W1","3/22/26","NYK NOP CHA SAS HOU MIA CLE MIL CHI POR"),
+R("S9 W2","3/30/26","NYK MIA CHA HOU SAS DEN DAL GSW CHI MIL"),
+R("S10 W1","5/29/26","BOS SAS DEN LAC PHX ATL CHA MIA PHI LAL","7-0 3-0 3-1 5-2 4-3 4-1 2-0 1-0 1-0 1-1"),
+R("S11 W2","6/7/26","SAS NYK CHA IND BOS LAC PHI PHX DEN LAL","7-0 9-1 13-2 6-1 7-6 10-5 10-3 11-6 16-10 9-6"),
+R("S11 W3","6/11/26","SAS NYK IND PHI CHA GSW LAC PHX DEN MIN","7-0 12-1 6-1 14-3 13-3 14-7 10-5 11-8 18-12 13-11"),
+R("S12 W1","7/8/26","HOU SAS CLE ATL TOR POR LAL LAC CHI NYK"),
+R("S13 Final","8/22/26","GSW HOU WAS NYK PHI SAS BOS CHA MIN IND"),
+R("S14 W1","10/10/26","SAS UTA NOP NYK WAS MIA DEN CLE PHI POR")];
+const P=[{l:"S2 Final",d:"9/27/25",t:["North","Drake","Cammm","Mari","ZPud"]},{l:"S3 Final",d:"10/15/25",t:["Drake","Camm","Counted","Tom","Mari","Mack","Chris","Gray","Cal","Durkio"]}];
+let tab="teams",i=D.length-1,pi=P.length-1;
+const $=id=>document.getElementById(id);
+function mv(cur,prev,k){if(!prev)return'<span class="nw">—</span>';const p=prev.indexOf(k);if(p<0)return'<span class="nw">NEW</span>';const d=p-cur;return d>0?`<span class="up">▲ ${d}</span>`:d<0?`<span class="dn">▼ ${-d}</span>`:'<span class="eq">–</span>'}
+function render(){
+ const L=tab==="teams"?D:P,idx=tab==="teams"?i:pi,e=L[idx],prev=L[idx-1];
+ $("chips").innerHTML=L.map((x,n)=>`<button class="${n===idx?'on':''}" data-n="${n}">${x.l}</button>`).reverse().join("");
+ $("chips").querySelectorAll("button").forEach(b=>b.onclick=()=>{tab==="teams"?i=+b.dataset.n:pi=+b.dataset.n;render()});
+ $("main").innerHTML=`<div class="head"><h2>${e.l} Rankings</h2><span class="date">${e.d}${prev?' · vs '+prev.l:''}</span></div>`+
+  e.t.map((k,n)=>`<div class="row"><div class="rk">${n+1}</div><div class="code${tab==="teams"?'':' nl'}"><span>${tab==="teams"?k:k.slice(0,2).toUpperCase()}</span>${tab==="teams"?`<img src="https://a.espncdn.com/i/teamlogos/nba/500/${ES[k]}.png" alt="" loading="lazy" onerror="this.parentNode.classList.add('nl');this.remove()">`:''}</div><div class="nm">${tab==="teams"?T[k]:k}</div>${e.r?`<div class="rec">${e.r[n]}</div>`:''}<div class="mv">${mv(n,prev&&prev.t,k)}</div></div>`).join("")+
+  (e.t[0]==="HOU"&&e.l==="S13 Final"?'<div class="note">#2 listed as Utah Jazz → Houston Rockets in the original post.</div>':'');
+ const c={},a={};
+ if(tab==="teams"){D.forEach(x=>{x.t.forEach(k=>a[k]=(a[k]||0)+1);c[x.t[0]]=(c[x.t[0]]||0)+1});
+  const top=o=>Object.entries(o).sort((x,y)=>y[1]-x[1]).slice(0,6).map(([k,v])=>`<div class="st"><span>${T[k]}</span><b>${v}</b></div>`).join("");
+  $("stats").innerHTML=`<div class="card"><h3>Most #1 Rankings</h3>${top(c)}</div><div class="card"><h3>Most Top-10 Appearances</h3>${top(a)}</div>`}
+ else $("stats").innerHTML="";
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));render()});
+render();
+</script></body></html>
