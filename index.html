@@ -76,8 +76,8 @@ svg circle{cursor:pointer}
 <div class="sts" id="sts"></div>
 </div>
 <script>
-const T={HOU:"Houston Rockets",DEN:"Denver Nuggets",NYK:"New York Knicks",BOS:"Boston Celtics",SAS:"San Antonio Spurs",BKN:"Brooklyn Nets",CLE:"Cleveland Cavaliers",GSW:"Golden State Warriors",LAL:"Los Angeles Lakers",OKC:"Oklahoma City Thunder",DAL:"Dallas Mavericks",IND:"Indiana Pacers",PHI:"Philadelphia 76ers",ATL:"Atlanta Hawks",MIN:"Minnesota Timberwolves",CHA:"Charlotte Hornets",UTA:"Utah Jazz",MIA:"Miami Heat",CHI:"Chicago Bulls",MIL:"Milwaukee Bucks",LAC:"Los Angeles Clippers",NOP:"New Orleans Pelicans",POR:"Portland Trail Blazers",WAS:"Washington Wizards",PHX:"Phoenix Suns",TOR:"Toronto Raptors",ORL:"Orlando Magic"};
-const ES={HOU:"hou",DEN:"den",NYK:"ny",BOS:"bos",SAS:"sa",BKN:"bkn",CLE:"cle",GSW:"gs",LAL:"lal",OKC:"okc",DAL:"dal",IND:"ind",PHI:"phi",ATL:"atl",MIN:"min",CHA:"cha",UTA:"utah",MIA:"mia",CHI:"chi",MIL:"mil",LAC:"lac",NOP:"no",POR:"por",WAS:"wsh",PHX:"phx",TOR:"tor",ORL:"orl"};
+const T={HOU:"Houston Rockets",DEN:"Denver Nuggets",NYK:"New York Knicks",BOS:"Boston Celtics",SAS:"San Antonio Spurs",BKN:"Brooklyn Nets",CLE:"Cleveland Cavaliers",GSW:"Golden State Warriors",LAL:"Los Angeles Lakers",OKC:"Oklahoma City Thunder",DAL:"Dallas Mavericks",IND:"Indiana Pacers",PHI:"Philadelphia 76ers",ATL:"Atlanta Hawks",MIN:"Minnesota Timberwolves",CHA:"Charlotte Hornets",UTA:"Utah Jazz",MIA:"Miami Heat",CHI:"Chicago Bulls",MIL:"Milwaukee Bucks",LAC:"Los Angeles Clippers",NOP:"New Orleans Pelicans",POR:"Portland Trail Blazers",WAS:"Washington Wizards",PHX:"Phoenix Suns",TOR:"Toronto Raptors",ORL:"Orlando Magic",DET:"Detroit Pistons",SAC:"Sacramento Kings",MEM:"Memphis Grizzlies"};
+const ES={HOU:"hou",DEN:"den",NYK:"ny",BOS:"bos",SAS:"sa",BKN:"bkn",CLE:"cle",GSW:"gs",LAL:"lal",OKC:"okc",DAL:"dal",IND:"ind",PHI:"phi",ATL:"atl",MIN:"min",CHA:"cha",UTA:"utah",MIA:"mia",CHI:"chi",MIL:"mil",LAC:"lac",NOP:"no",POR:"por",WAS:"wsh",PHX:"phx",TOR:"tor",ORL:"orl",DET:"det",SAC:"sac",MEM:"mem"};
 const R=(l,d,s,r)=>({l,d,t:s.split(" "),r:r&&r.split(" ")});
 const D=[
 R("S2 Final","9/27/25","CHI GSW UTA BKN LAL LAC DEN MIN TOR BOS"),
@@ -99,7 +99,8 @@ R("S11 W2","6/7/26","SAS NYK CHA IND BOS LAC PHI PHX DEN LAL","7-0 9-1 13-2 6-1 
 R("S11 W3","6/11/26","SAS NYK IND PHI CHA GSW LAC PHX DEN MIN","7-0 12-1 6-1 14-3 13-3 14-7 10-5 11-8 18-12 13-11"),
 R("S12 W1","7/8/26","HOU SAS CLE ATL TOR POR LAL LAC CHI NYK"),
 R("S13 Final","8/22/26","GSW HOU WAS NYK PHI SAS BOS CHA MIN IND"),
-R("S14 W1","10/10/26","SAS UTA NOP NYK WAS MIA DEN CLE PHI POR")];
+R("S14 W1","10/10/26","SAS UTA NOP NYK WAS MIA DEN CLE PHI POR"),
+R("S14 W2","10/16/26","SAS NYK NOP WAS UTA DEN MIA PHI DET CLE")];
 const P=[{l:"S2 Final",d:"9/27/25",t:["North","Drake","Cammm","Mari","ZPud"]},{l:"S3 Final",d:"10/15/25",t:["Drake","Camm","Counted","Tom","Mari","Mack","Chris","Gray","Cal","Durkio"]}];
 let tab="teams",i=D.length-1,pi=P.length-1,sel=null;
 const $=id=>document.getElementById(id);
