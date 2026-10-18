@@ -53,6 +53,8 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--red)}
 .list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .list .card{display:flex;align-items:center;gap:13px;padding:12px 16px}
 .list .num{font-size:44px;width:44px}
+.ps{font:11px 'JetBrains Mono',monospace;color:var(--tx2);line-height:1.4}
+.list .ps{max-width:46%;text-align:right}
 .list h5{flex:1;font:600 14px 'Inter',sans-serif;min-width:0}
 .trk{margin-top:12px;padding:20px 22px;cursor:default;animation-delay:.3s}
 .trk:hover{transform:none;border-color:var(--gl)}
@@ -101,7 +103,7 @@ R("S12 W1","7/8/26","HOU SAS CLE ATL TOR POR LAL LAC CHI NYK"),
 R("S13 Final","8/22/26","GSW HOU WAS NYK PHI SAS BOS CHA MIN IND"),
 R("S14 W1","10/10/26","SAS UTA NOP NYK WAS MIA DEN CLE PHI POR"),
 R("S14 W2","10/16/26","SAS NYK NOP WAS UTA DEN MIA PHI DET CLE")];
-const P=[{l:"S2 Final",d:"9/27/25",t:["North","Drake","Cammm","Mari","ZPud"]},{l:"S3 Final",d:"10/15/25",t:["Drake","Camm","Counted","Tom","Mari","Mack","Chris","Gray","Cal","Durkio"]}];
+const P=[{l:"S2 Final",d:"9/27/25",t:["North","Drake","Cammm","Mari","ZPud"]},{l:"S3 Final",d:"10/15/25",t:["Drake","Camm","Counted","Tom","Mari","Mack","Chris","Gray","Cal","Durkio"]},{l:"S14 W2",d:"10/18/26",t:["LeBewwy","SmooveRelays","whatare_udoing24","loqlens","SeveraIReminders","Terrelthelegend","PureIogicaI","VVITH0UTL0VE","Defencse","o6il"],r:["5 GP · 61 PPG · 6.4 APG · 4.6 RPG · 5.8 SPG · 86% FG", "9 GP · 55.3 PPG · 7.6 APG · 2 RPG · 4.2 SPG · 84.6% FG", "3 GP · 52 PPG · 7 APG · 3 RPG · 3 SPG · 94% FG", "10 GP · 47.5 PPG · 9.4 APG · 88.4% FG", "5 GP · 46.8 PPG · 5.6 APG · 85.3% FG", "3 GP · 44.7 PPG · 3.7 APG · 80.3% FG", "4 GP · 37.5 PPG · 7 APG · 78% FG", "5 GP · 23.8 PPG · 11.8 APG · 82.7% FG", "2 GP · 36 PPG · 4.5 APG · 78.4% FG", "4 GP · 22 PPG · 18 APG · 75% FG"]}];
 let tab="teams",i=D.length-1,pi=P.length-1,sel=null;
 const $=id=>document.getElementById(id);
 const nm=k=>tab==="teams"?T[k]:k;
@@ -121,7 +123,7 @@ function render(){
  $("rail").innerHTML=L.map((x,n)=>`<button class="${n===idx?'on':''}" data-n="${n}">${x.l}</button>`).reverse().join("");
  const on=$("rail").querySelector(".on");
  const cls=(q)=>q===k?' sel':'';
- const rec=n=>e.r?`<span>${e.r[n]}</span>`:'';
+ const rec=n=>e.r?`<span${tab==="players"?' class="ps"':''}>${e.r[n]}</span>`:'';
  const d=n=>`style="--d:${n*.05}s"`;
  let h=`<div class="bar"><div><h2 style="display:inline">${e.l} Rankings</h2><span class="date">${e.d}${pv?' · vs '+pv.l:''}</span></div><div class="nav"><button data-s="1" aria-label="Older">←</button><button data-s="-1" aria-label="Newer">→</button></div></div>`;
  const a=e.t[0];
